@@ -28,6 +28,28 @@ if (navToggle) {
   });
 }
 
+// ===================================================================
+// COOKIE BANNER
+// ===================================================================
+const cookieBanner = document.getElementById('cookieBanner');
+
+if (cookieBanner) {
+  const consent = localStorage.getItem('cookieConsent');
+  if (!consent) cookieBanner.hidden = false;
+
+  document.getElementById('cookieAccept')?.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'accepted');
+    cookieBanner.hidden = true;
+    // Acá se podría inicializar Google Analytics u otra herramienta de medición
+    // una vez que el usuario acepta, para no cargar cookies sin consentimiento.
+  });
+
+  document.getElementById('cookieReject')?.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'rejected');
+    cookieBanner.hidden = true;
+  });
+}
+
 // Scroll reveal
 const revealTargets = document.querySelectorAll(
   '.hero-copy, .hero-visual, .section-head, .quote-card, .sobre-visual, .sobre-copy, .product-card, .contact-card'
