@@ -279,6 +279,8 @@ if (modal) {
     progressFill.style.width = `${(currentStep / TOTAL_STEPS) * 100}%`;
     backBtn.hidden = currentStep === 1;
     nextBtn.textContent = currentStep === TOTAL_STEPS ? 'Enviar cotización por WhatsApp' : 'Siguiente →';
+    const panel = modal.querySelector('.quote-modal-panel');
+    if (panel) panel.scrollTop = 0;
     if (currentStep === TOTAL_STEPS) buildSummary();
   }
 
@@ -293,6 +295,7 @@ if (modal) {
       ['Garage', data.get('garage') ? 'Sí' : 'No'],
       ['GNC', data.get('gnc') ? 'Sí' : 'No'],
       ['Rastreador satelital', data.get('rastreador') ? 'Sí' : 'No'],
+      ['Localidad de guarda', data.get('localidad') || '-'],
       ['Nombre', data.get('nombre') || '-'],
       ['Teléfono', data.get('telefono') || '-'],
       ['Email', data.get('email') || '-'],
@@ -342,7 +345,13 @@ if (modal) {
 
   nextBtn.addEventListener('click', () => {
     const activeStep = steps.find(s => Number(s.dataset.step) === currentStep);
-    const inputs = activeStep.querySelectorAll('input, select');
+    if (!activeStep) return;
+
+    // Solo se valida lo que está realmente visible (se ignoran los campos
+    // dentro de un contenedor con [hidden], como "Otra marca" cuando no aplica).
+    const inputs = Array.from(activeStep.querySelectorAll('input, select'))
+      .filter(el => !el.closest('[hidden]'));
+
     for (const input of inputs) {
       if (!input.checkValidity()) {
         input.reportValidity();
@@ -367,6 +376,7 @@ if (modal) {
       `Garage: ${data.get('garage') ? 'Sí' : 'No'}`,
       `GNC: ${data.get('gnc') ? 'Sí' : 'No'}`,
       `Rastreador satelital: ${data.get('rastreador') ? 'Sí' : 'No'}`,
+      data.get('localidad') ? `Localidad de guarda: ${data.get('localidad')}` : null,
       `Nombre: ${data.get('nombre')}`,
       `Teléfono: ${data.get('telefono')}`,
       data.get('email') ? `Email: ${data.get('email')}` : null,
