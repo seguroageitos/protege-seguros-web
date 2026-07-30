@@ -472,6 +472,7 @@ em{ font-style: italic; color: var(--silver-500); }
   padding: 20px 22px;
   display:flex; flex-direction: column; gap: 14px;
 }
+.cookie-banner[hidden]{ display: none; }
 .cookie-banner p{ font-size: .85rem; line-height: 1.5; color: rgba(245,244,238,.85); }
 .cookie-banner a{ color: var(--silver-400); text-decoration: underline; }
 .cookie-actions{ display:flex; justify-content: flex-end; gap: 10px; }
