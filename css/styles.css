@@ -210,11 +210,24 @@ em{ font-style: italic; color: var(--silver-500); }
 @keyframes bob{ 0%,100%{ transform: translateY(0) rotate(0);} 50%{ transform: translateY(-10px) rotate(-2deg);} }
 
 /* strip */
-.strip{ background: var(--navy-900); padding: 18px 0; }
-.strip-inner p{
-  text-align:center; color: var(--silver-100);
-  font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; font-weight:500;
+.strip{ background: var(--navy-900); padding: 26px 0; }
+.strip-label{
+  text-align:center; color: rgba(245,244,238,.55);
+  font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; font-weight:500;
+  margin-bottom: 14px;
 }
+.strip-logos{
+  display:flex; align-items:center; justify-content:center;
+  gap: 14px; flex-wrap: wrap;
+}
+.strip-logos span{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--silver-100);
+}
+.strip-dot{ font-style: normal !important; color: var(--silver-500); font-size: .7rem !important; opacity:.7; }
 
 /* ===================================================================
    SECTION HEAD (shared)
