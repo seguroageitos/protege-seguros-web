@@ -458,7 +458,8 @@ em{ font-style: italic; color: var(--silver-500); }
    COOKIE BANNER
 =================================================================== */
 .cookie-banner{
-  position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 900;
+  position: fixed; left: 20px; right: 20px; z-index: 900;
+  bottom: calc(20px + env(safe-area-inset-bottom));
   max-width: 640px; margin: 0 auto;
   background: var(--navy-900);
   color: var(--ivory-100);
@@ -502,6 +503,8 @@ em{ font-style: italic; color: var(--silver-500); }
   border-radius: var(--radius-lg);
   max-width: 560px; width:100%;
   max-height: 88vh; overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   padding: 42px 36px 34px;
   box-shadow: var(--shadow-soft);
   transform: translateY(18px) scale(.98);
@@ -580,26 +583,80 @@ em{ font-style: italic; color: var(--silver-500); }
   .main-nav{ display:none; }
   .header-cta{ display:none; }
   .nav-toggle{
-    display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px;
+    display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:10px;
+    min-width: 44px; min-height: 44px; align-items:center; justify-content:center;
   }
   .nav-toggle span{ width: 22px; height:2px; background: var(--navy-900); border-radius: 2px; }
 
   .main-nav.open{
     display:flex; flex-direction:column;
-    position:absolute; top:84px; left:0; right:0;
+    position:absolute; top: 100%; left:0; right:0;
     background: var(--ivory-100);
-    padding: 20px 28px 28px;
-    gap: 18px;
+    padding: 20px 28px calc(28px + env(safe-area-inset-bottom));
+    gap: 4px;
     border-bottom: 1px solid rgba(19,27,43,.1);
+    box-shadow: var(--shadow-card);
   }
+  .main-nav.open a{ padding: 12px 0; font-size: 1.02rem; }
 
-  .hero{ padding: 56px 0 50px; }
-  .hero-stats{ gap: 24px; flex-wrap: wrap; }
+  .header-inner{ height: 72px; }
+  .brand-name{ font-size: 1.22rem; }
+
+  /* Menos aire vertical en mobile: se scrollea mucho menos */
+  .hero{ padding: 40px 0 44px; }
+  .cotizar{ padding: 64px 0; }
+  .sobre-mi{ padding: 64px 0; }
+  .productos{ padding: 64px 0; }
+  .contacto{ padding: 64px 0 90px; }
+  .legal{ padding: 44px 0 80px; }
+
+  .hero h1{ font-size: clamp(2.3rem, 9vw, 2.7rem); }
+  .hero-lead{ font-size: 1.02rem; }
+  .hero-actions{ flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-actions .btn{ justify-content: center; width: 100%; }
+  .hero-stats{ gap: 20px 28px; margin-top: 40px; padding-top: 22px; }
+
+  .shield-big{ width: 168px; }
+  .orbit-chip{ padding: 8px 12px; font-size: .78rem; }
+  .chip-auto{ left: 0; }
+  .chip-hogar{ right: 0; }
+  .chip-vida{ left: 8%; }
+
+  .section-head{ margin-bottom: 32px; }
+  .section-head h2{ font-size: clamp(1.7rem, 6vw, 2.1rem); }
+
   .quote-picker{ grid-template-columns: 1fr; }
-  .quote-modal-panel{ padding: 32px 22px 26px; }
+  .quote-card{ padding: 30px 22px 26px; }
+  .quote-modal{ padding: 0; align-items: flex-end; }
+  .quote-modal-panel{
+    max-width: none; width: 100%; max-height: 92vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 28px 20px calc(24px + env(safe-area-inset-bottom));
+  }
+  .modal-head h3{ font-size: 1.4rem; }
   .field-row{ flex-wrap: wrap; }
+  .modal-actions{ flex-direction: column-reverse; }
+  .modal-actions .btn{ width: 100%; }
+
   .mission-grid{ grid-template-columns: 1fr; }
-  .product-grid{ grid-template-columns: 1fr 1fr; }
-  .contact-grid{ grid-template-columns: 1fr; }
+  .product-grid{ grid-template-columns: 1fr 1fr; gap: 14px; }
+  .product-card{ padding: 22px 18px; }
+  .contact-grid{ grid-template-columns: 1fr 1fr; gap: 12px; }
+  .contact-card{ padding: 20px 16px; }
+
+  .footer-inner{ flex-direction: column; gap: 24px; }
   .footer-bottom{ flex-direction: column; }
+  .footer-legal{ flex-direction: column; gap: 10px; }
+}
+
+@media (max-width: 480px){
+  .wrap{ padding: 0 18px; }
+  .hero h1{ font-size: clamp(2rem, 10vw, 2.4rem); }
+  .hero-stats{ gap: 16px 24px; }
+  .hero-stats strong{ font-size: 1.7rem; }
+  .strip-logos{ gap: 10px; }
+  .strip-logos span{ font-size: 1rem; }
+  .product-grid{ grid-template-columns: 1fr; }
+  .contact-grid{ grid-template-columns: 1fr; }
+  .check-grid{ padding: 12px 14px; }
 }
