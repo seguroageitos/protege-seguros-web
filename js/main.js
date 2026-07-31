@@ -29,17 +29,30 @@ if (navToggle) {
 }
 
 // ===================================================================
+// BOTÓN FLOTANTE DE WHATSAPP
+// ===================================================================
+const fabWhatsapp = document.getElementById('fabWhatsapp');
+
+function setFabHidden(hidden) {
+  fabWhatsapp?.classList.toggle('is-hidden', hidden);
+}
+
+// ===================================================================
 // COOKIE BANNER
 // ===================================================================
 const cookieBanner = document.getElementById('cookieBanner');
 
 if (cookieBanner) {
   const consent = localStorage.getItem('cookieConsent');
-  if (!consent) cookieBanner.hidden = false;
+  if (!consent) {
+    cookieBanner.hidden = false;
+    setFabHidden(true); // evita que el FAB tape el banner mientras está visible
+  }
 
   document.getElementById('cookieAccept')?.addEventListener('click', () => {
     localStorage.setItem('cookieConsent', 'accepted');
     cookieBanner.hidden = true;
+    setFabHidden(false);
     // Acá se podría inicializar Google Analytics u otra herramienta de medición
     // una vez que el usuario acepta, para no cargar cookies sin consentimiento.
   });
@@ -47,6 +60,7 @@ if (cookieBanner) {
   document.getElementById('cookieReject')?.addEventListener('click', () => {
     localStorage.setItem('cookieConsent', 'rejected');
     cookieBanner.hidden = true;
+    setFabHidden(false);
   });
 }
 
@@ -337,12 +351,14 @@ if (modal) {
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    setFabHidden(true);
   }
 
   function closeWizard() {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    setFabHidden(false);
   }
 
   document.querySelectorAll('[data-open-wizard]').forEach(el => {

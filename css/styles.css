@@ -29,8 +29,8 @@
   --ease: cubic-bezier(.22,.9,.32,1);
 }
 
-*, *::before, *::after{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; }
+*, *::before, *::after{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html{ scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overscroll-behavior-y: contain; }
 body{
   margin:0;
   font-family: var(--font-body);
@@ -72,6 +72,7 @@ em{ font-style: italic; color: var(--silver-500); }
   letter-spacing: .01em;
   border: 1.5px solid transparent;
   cursor:pointer;
+  touch-action: manipulation;
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .3s;
 }
 .btn-primary{
@@ -80,12 +81,14 @@ em{ font-style: italic; color: var(--silver-500); }
   box-shadow: var(--shadow-card);
 }
 .btn-primary:hover{ transform: translateY(-3px); box-shadow: var(--shadow-soft); background: var(--navy-700); }
+.btn-primary:active{ transform: scale(.97); background: var(--navy-700); }
 .btn-ghost{
   background: transparent;
   color: var(--navy-800);
   border-color: var(--navy-800);
 }
 .btn-ghost:hover{ background: var(--navy-800); color: var(--ivory-100); transform: translateY(-3px); }
+.btn-ghost:active{ transform: scale(.97); background: var(--navy-800); color: var(--ivory-100); }
 .btn-small{ padding: 10px 20px; font-size: .84rem; }
 
 /* ===================================================================
@@ -276,6 +279,7 @@ em{ font-style: italic; color: var(--silver-500); }
   box-shadow: var(--shadow-soft);
   border-color: var(--silver-500);
 }
+.quote-card:active{ transform: scale(.98); box-shadow: var(--shadow-card); }
 .quote-icon{
   width: 66px; height: 66px; border-radius: 50%;
   background: linear-gradient(160deg, var(--ivory-200), var(--ivory-100));
@@ -361,6 +365,7 @@ em{ font-style: italic; color: var(--silver-500); }
   box-shadow: var(--shadow-card);
   border-color: var(--silver-400);
 }
+.product-card:active{ transform: scale(.97); }
 .product-icon{
   width: 48px; height: 48px; border-radius: 50%;
   background: var(--ivory-100);
@@ -390,6 +395,8 @@ em{ font-style: italic; color: var(--silver-500); }
   transition: transform .3s var(--ease), background .3s;
 }
 .contact-card:hover{ transform: translateY(-5px); background: var(--navy-900); }
+.contact-card:active{ transform: scale(.97); background: var(--navy-900); }
+.contact-card:active h3, .contact-card:active p{ color: var(--ivory-100); }
 .contact-card:hover h3, .contact-card:hover p{ color: var(--ivory-100); }
 .contact-icon{ color: var(--navy-800); transition: color .3s; }
 .contact-icon svg{ width: 26px; height: 26px; }
@@ -453,6 +460,28 @@ em{ font-style: italic; color: var(--silver-500); }
 }
 .footer-legal a{ color: rgba(245,244,238,.55); transition: color .25s; }
 .footer-legal a:hover{ color: var(--silver-400); }
+
+/* ===================================================================
+   FLOATING WHATSAPP BUTTON
+=================================================================== */
+.fab-whatsapp{
+  position: fixed; z-index: 850;
+  right: 20px; bottom: calc(20px + env(safe-area-inset-bottom));
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--navy-800);
+  color: var(--ivory-100);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: var(--shadow-soft);
+  border: 1.5px solid rgba(255,255,255,.12);
+  transition: transform .3s var(--ease), background .3s, opacity .3s, visibility .3s;
+}
+.fab-whatsapp:hover{ transform: translateY(-3px) scale(1.05); background: var(--navy-700); }
+.fab-whatsapp:active{ transform: scale(.94); }
+.fab-whatsapp.is-hidden{ opacity: 0; visibility: hidden; transform: translateY(12px); }
+
+@media (max-width: 760px){
+  .fab-whatsapp{ right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); width: 52px; height: 52px; }
+}
 
 /* ===================================================================
    COOKIE BANNER
@@ -534,7 +563,7 @@ em{ font-style: italic; color: var(--silver-500); }
 .wizard-step .field{ margin-bottom: 16px; }
 .wizard-step .field label{ display:block; font-size: .8rem; font-weight: 600; color: var(--navy-800); margin-bottom: 6px; }
 .wizard-step input, .wizard-step select{
-  width:100%; font-family: var(--font-body); font-size: .95rem;
+  width:100%; font-family: var(--font-body); font-size: 16px;
   padding: 12px 14px; border-radius: var(--radius-sm);
   border: 1.5px solid var(--ivory-300); background: var(--white); color: var(--ink);
   transition: border-color .25s, box-shadow .25s;
