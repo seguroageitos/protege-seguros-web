@@ -313,11 +313,6 @@ em{ font-style: italic; color: var(--silver-500); }
 .sobre-mi h2{ color: var(--ivory-100); font-size: clamp(2rem, 3.2vw, 2.7rem); }
 .sobre-mi h2 em{ color: var(--silver-400); }
 .sobre-copy p{ margin-top: 20px; color: rgba(245,244,238,.78); line-height: 1.65; font-size: 1.05rem; }
-.credentials{ display:flex; gap:12px; margin-top: 26px; flex-wrap: wrap; }
-.credentials span{
-  font-size: .78rem; font-weight:500; padding: 8px 14px; border-radius: 999px;
-  border: 1px solid rgba(174,188,199,.45); color: var(--silver-100);
-}
 .mission-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
 .mission-card{
   background: rgba(245,244,238,.05);
@@ -350,7 +345,7 @@ em{ font-style: italic; color: var(--silver-500); }
 =================================================================== */
 .productos{ padding: 110px 0; background: var(--ivory-100); }
 .product-grid{
-  display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
 }
 .product-card{
   display:block;
